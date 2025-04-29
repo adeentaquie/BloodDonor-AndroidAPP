@@ -3,55 +3,66 @@ package com.example.blooddonor;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+import com.google.firebase.FirebaseApp;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private static final int SPLASH_DISPLAY_LENGTH = 2000; // 2 seconds
+    private static final int SPLASH_DURATION = 3000; // 3 seconds
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        FirebaseApp.initializeApp(this);
 
-        // Find blood drop image views
+        // References to views
         ImageView bloodDrop1 = findViewById(R.id.blood_drop_1);
         ImageView bloodDrop2 = findViewById(R.id.blood_drop_2);
         ImageView bloodDrop3 = findViewById(R.id.blood_drop_3);
-
-        // Create the translate animation for each drop
-        Animation fallAnimation = new TranslateAnimation(0, 0, 0, 1000); // Move from top to bottom
-        fallAnimation.setDuration(3000); // Animation duration
-        fallAnimation.setRepeatCount(Animation.INFINITE); // Repeat forever for a continuous fall
-        fallAnimation.setInterpolator(new LinearInterpolator());
-
-        // Start animations for each drop at different times
-        bloodDrop1.startAnimation(fallAnimation);
-        fallAnimation.setStartOffset(0);
-
-        bloodDrop2.startAnimation(fallAnimation);
-        fallAnimation.setStartOffset(500); // Delay for 500ms for drop 2
-
-        bloodDrop3.startAnimation(fallAnimation);
-        fallAnimation.setStartOffset(1000); // Delay for 1000ms for drop 3
-
-
         ImageView logo = findViewById(R.id.splash_logo);
-        TextView slogan = findViewById(R.id.splash_footer);
+        TextView title = findViewById(R.id.splash_text);
+        TextView footer = findViewById(R.id.splash_footer);
         TextView copyright = findViewById(R.id.splash_copyright);
 
+        // Falling blood drop animations (independent)
+        Animation dropAnim1 = createDropAnimation(0);
+        Animation dropAnim2 = createDropAnimation(500);
+        Animation dropAnim3 = createDropAnimation(1000);
 
+        bloodDrop1.startAnimation(dropAnim1);
+        bloodDrop2.startAnimation(dropAnim2);
+        bloodDrop3.startAnimation(dropAnim3);
+
+        // Fade-in animation for logo and text
+        Animation fadeIn = new AlphaAnimation(0, 1);
+        fadeIn.setDuration(1000);
+        logo.startAnimation(fadeIn);
+        title.startAnimation(fadeIn);
+        footer.startAnimation(fadeIn);
+        copyright.startAnimation(fadeIn);
+
+        // Move to LoginActivity after splash
+        new Handler().postDelayed(() -> {
+            startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+            finish();
+        }, SPLASH_DURATION);
     }
 
+    private Animation createDropAnimation(int startOffset) {
+        TranslateAnimation anim = new TranslateAnimation(0, 0, 0, 1000);
+        anim.setDuration(3000);
+        anim.setStartOffset(startOffset);
+        anim.setRepeatCount(Animation.INFINITE);
+        anim.setInterpolator(new LinearInterpolator());
+        return anim;
+    }
 }

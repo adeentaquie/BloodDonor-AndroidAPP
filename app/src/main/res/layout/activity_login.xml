@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/splash_gradient">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="24dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome Back"
+            android:textColor="#FFFFFF"
+            android:textSize="28sp"
+            android:fontFamily="@font/poppins_bold"
+            android:layout_marginTop="60dp"
+            android:layout_marginBottom="30dp" />
+
+        <EditText
+            android:id="@+id/email_input"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:hint="Email"
+            android:background="@drawable/edittext_background"
+            android:padding="12dp"
+            android:inputType="textEmailAddress"
+            android:textColor="#000000"
+            android:textColorHint="#999999"
+            android:fontFamily="@font/poppins_regular" />
+
+        <EditText
+            android:id="@+id/password_input"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:hint="Password"
+            android:background="@drawable/edittext_background"
+            android:padding="12dp"
+            android:layout_marginTop="15dp"
+            android:inputType="textPassword"
+            android:textColor="#000000"
+            android:textColorHint="#999999"
+            android:fontFamily="@font/poppins_regular" />
+
+        <Button
+            android:id="@+id/login_btn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Login"
+            android:backgroundTint="#FFFFFF"
+            android:textColor="#B00020"
+            android:textSize="18sp"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/poppins_bold" />
+
+        <TextView
+            android:id="@+id/register_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Don't have an account? Register here"
+            android:textColor="#FFE1E1"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_regular" />
+    </LinearLayout>
+</ScrollView>

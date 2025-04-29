@@ -1,5 +1,8 @@
+// Top-level build.gradle.kts for the app module
+
 plugins {
     alias(libs.plugins.android.application)
+    id("com.google.gms.google-services") // ✅ Apply Firebase plugin here
 }
 
 android {
@@ -25,6 +28,7 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -32,6 +36,8 @@ android {
 }
 
 dependencies {
+    implementation("com.google.firebase:firebase-auth:22.1.1")
+    implementation("com.google.firebase:firebase-firestore:24.7.1")
 
     implementation(libs.appcompat)
     implementation(libs.material)
