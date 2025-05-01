@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">BloodDonor</string>
+    <string-array name="blood_groups">
+        <item>A+</item>
+        <item>A-</item>
+        <item>B+</item>
+        <item>B-</item>
+        <item>AB+</item>
+        <item>AB-</item>
+        <item>O+</item>
+        <item>O-</item>
+    </string-array>
+
+    <string-array name="urgency_levels">
+        <item>High</item>
+        <item>Medium</item>
+        <item>Low</item>
+    </string-array>
+    <string-array name="cities">
+        <item>Lahore</item>
+        <item>Karachi</item>
+        <item>Islamabad</item>
+        <item>Peshawar</item>
+        <item>Rawalpindi</item>
+        <item>Quetta</item>
+        <item>Sialkot</item>
+    </string-array>
+
 </resources>

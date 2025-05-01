@@ -38,6 +38,9 @@ android {
 dependencies {
     implementation("com.google.firebase:firebase-auth:22.1.1")
     implementation("com.google.firebase:firebase-firestore:24.7.1")
+    implementation ("org.osmdroid:osmdroid-android:6.1.10")
+    implementation("org.osmdroid:osmdroid-wms:6.1.10")
+    implementation(libs.osmdroid)
 
     implementation(libs.appcompat)
     implementation(libs.material)
