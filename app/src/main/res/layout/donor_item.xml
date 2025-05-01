@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="?android:attr/selectableItemBackground"
+    android:layout_marginBottom="10dp"
+    android:elevation="4dp">
+
+    <!-- Donor's Name -->
+    <TextView
+        android:id="@+id/donor_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="John Doe"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:fontFamily="@font/poppins_bold"/>
+
+    <!-- Donor's Blood Group -->
+    <TextView
+        android:id="@+id/donor_blood_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="A+"
+        android:textColor="#B00020"
+        android:textSize="16sp"
+        android:fontFamily="@font/poppins_regular"/>
+
+    <!-- Donor's Contact -->
+    <TextView
+        android:id="@+id/donor_contact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Contact: 03001234567"
+        android:textColor="#555555"
+        android:textSize="16sp"
+        android:fontFamily="@font/poppins_regular"/>
+</LinearLayout>

@@ -11,13 +11,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ScrollView;
 
 public class DashboardActivity extends AppCompatActivity {
 
-    private Button btnPostRequest, btnFindDonors, btnDonationHistory, btnProfile;
+    private Button btnPostRequest, btnFindDonors, btnDonationHistory, btnProfile, btnViewRequests;
     private FirebaseAuth mAuth;
     private FirebaseFirestore firestore;
 
@@ -26,10 +23,6 @@ public class DashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        ScrollView rootLayout = findViewById(R.id.dashboard_root);
-        Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
-        rootLayout.startAnimation(fadeIn);
-
         mAuth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
 
@@ -37,7 +30,9 @@ public class DashboardActivity extends AppCompatActivity {
         btnFindDonors = findViewById(R.id.btn_find_donors);
         btnDonationHistory = findViewById(R.id.btn_donation_history);
         btnProfile = findViewById(R.id.btn_profile);
+        btnViewRequests = findViewById(R.id.btn_view_requests);  // View Blood Requests button
 
+        // Check if the user is logged in
         if (mAuth.getCurrentUser() == null) {
             Toast.makeText(this, "User not logged in!", Toast.LENGTH_SHORT).show();
             finish(); // prevent access
@@ -47,6 +42,7 @@ public class DashboardActivity extends AppCompatActivity {
         String userId = mAuth.getCurrentUser().getUid();
         DocumentReference userRef = firestore.collection("users").document(userId);
 
+        // Fetch user data from Firestore to get the role (donor/recipient)
         userRef.get().addOnSuccessListener(documentSnapshot -> {
             if (documentSnapshot.exists()) {
                 String name = documentSnapshot.getString("name");
@@ -55,11 +51,16 @@ public class DashboardActivity extends AppCompatActivity {
                 Toast.makeText(this, "Welcome " + name + " (" + role + ")", Toast.LENGTH_SHORT).show();
 
                 if ("recipient".equalsIgnoreCase(role)) {
-                    // Hide "Post Blood Request" for recipients
-                    btnPostRequest.setVisibility(View.GONE);
+                    // Recipients can only post blood requests, hide the View Blood Requests button
+                    btnPostRequest.setVisibility(View.VISIBLE);  // Show "Post Blood Request" for recipients
+                    btnViewRequests.setVisibility(View.GONE);    // Hide "View Blood Requests" for recipients
+                } else {
+                    // Donors can only view blood requests, hide the Post Blood Request button
+                    btnPostRequest.setVisibility(View.GONE);  // Hide "Post Blood Request" for donors
+                    btnViewRequests.setVisibility(View.VISIBLE);  // Show "View Blood Requests" for donors
                 }
 
-                // Set up button listeners
+                // Set up button listeners for the actions
                 setupListeners();
             } else {
                 Toast.makeText(this, "User data not found!", Toast.LENGTH_SHORT).show();
@@ -70,16 +71,10 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     private void setupListeners() {
-        btnPostRequest.setOnClickListener(v ->
-                startActivity(new Intent(DashboardActivity.this, PostRequestActivity.class)));
+        btnPostRequest.setOnClickListener(v -> startActivity(new Intent(DashboardActivity.this, PostRequestActivity.class)));
 
-//        btnFindDonors.setOnClickListener(v ->
-//                startActivity(new Intent(DashboardActivity.this, FindDonorActivity.class)));
-//
-//        btnDonationHistory.setOnClickListener(v ->
-//                startActivity(new Intent(DashboardActivity.this, DonationHistoryActivity.class)));
-//
-//        btnProfile.setOnClickListener(v ->
-//                startActivity(new Intent(DashboardActivity.this, ProfileActivity.class)));
+        btnFindDonors.setOnClickListener(v -> startActivity(new Intent(DashboardActivity.this, FindDonorActivity.class)));
+
+        btnViewRequests.setOnClickListener(v -> startActivity(new Intent(DashboardActivity.this, ViewBloodRequestsActivity.class))); // Navigate to ViewBloodRequestsActivity
     }
 }

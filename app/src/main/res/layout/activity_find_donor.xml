@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp"
+    android:background="@drawable/bg_gradient_dark">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <!-- Heading for Blood Group -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Blood Group"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/poppins_bold"/>
+
+        <!-- Blood Group Spinner -->
+        <Spinner
+            android:id="@+id/spinner_blood_group"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/edittext_background"
+            android:padding="12dp" />
+
+        <!-- Heading for Location -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter Location"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/poppins_bold"/>
+
+        <!-- Location EditText -->
+        <EditText
+            android:id="@+id/input_location"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:hint="City/Location"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/edittext_background"
+            android:padding="12dp"
+            android:textColor="#000000"
+            android:fontFamily="@font/poppins_regular" />
+
+        <!-- Find Donors Button -->
+        <Button
+            android:id="@+id/btn_find_donors"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:text="Find Donors"
+            android:textColor="#B00020"
+            android:textSize="18sp"
+            android:backgroundTint="#FFFFFF"
+            android:fontFamily="@font/poppins_bold" />
+
+        <!-- Donors RecyclerView -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_donors"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp" />
+
+    </LinearLayout>
+</ScrollView>
