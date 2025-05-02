@@ -11,7 +11,7 @@
         android:orientation="vertical"
         android:gravity="center">
 
-        <!-- Heading for Blood Group -->
+        <!-- Blood Group -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -19,9 +19,8 @@
             android:textColor="#FFFFFF"
             android:textSize="18sp"
             android:layout_marginBottom="10dp"
-            android:fontFamily="@font/poppins_bold"/>
+            android:fontFamily="@font/poppins_bold" />
 
-        <!-- Blood Group Spinner -->
         <Spinner
             android:id="@+id/spinner_blood_group"
             android:layout_width="match_parent"
@@ -29,7 +28,7 @@
             android:background="@drawable/edittext_background"
             android:padding="12dp" />
 
-        <!-- Heading for Urgency Level -->
+        <!-- Urgency -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -38,9 +37,8 @@
             android:textSize="18sp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
-            android:fontFamily="@font/poppins_bold"/>
+            android:fontFamily="@font/poppins_bold" />
 
-        <!-- Urgency Level Spinner -->
         <Spinner
             android:id="@+id/spinner_urgency"
             android:layout_width="match_parent"
@@ -48,53 +46,58 @@
             android:background="@drawable/edittext_background"
             android:padding="12dp" />
 
-        <!-- Heading for Hospital Name -->
+        <!-- Select Location Button -->
+        <Button
+            android:id="@+id/btn_select_location"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Select Location on Map"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/poppins_bold"
+            android:backgroundTint="#FFFFFF"
+            android:textColor="#B00020" />
+
+        <!-- Hospital -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Hospital Name"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"
-            android:fontFamily="@font/poppins_bold"/>
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/poppins_bold" />
 
-        <!-- Hospital Name (EditText) -->
         <EditText
             android:id="@+id/input_hospital"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:hint="Enter Hospital Name"
-            android:layout_marginTop="16dp"
+            android:hint="Hospital Name"
             android:background="@drawable/edittext_background"
             android:padding="12dp"
             android:textColor="#000000"
             android:fontFamily="@font/poppins_regular" />
 
-        <!-- Heading for Location -->
+        <!-- City -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Location"
+            android:text="City"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"
-            android:fontFamily="@font/poppins_bold"/>
+            android:fontFamily="@font/poppins_bold" />
 
-        <!-- Location input -->
         <EditText
             android:id="@+id/input_location"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:hint="City/Location"
-            android:layout_marginTop="16dp"
+            android:hint="City"
             android:background="@drawable/edittext_background"
             android:padding="12dp"
             android:textColor="#000000"
             android:fontFamily="@font/poppins_regular" />
 
-        <!-- Heading for Latitude -->
+        <!-- Latitude -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -102,23 +105,20 @@
             android:textColor="#FFFFFF"
             android:textSize="18sp"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"
-            android:fontFamily="@font/poppins_bold"/>
+            android:fontFamily="@font/poppins_bold" />
 
-        <!-- Latitude (Editable) -->
         <EditText
             android:id="@+id/input_latitude"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:hint="Latitude"
-            android:layout_marginTop="16dp"
             android:background="@drawable/edittext_background"
             android:padding="12dp"
             android:textColor="#000000"
             android:fontFamily="@font/poppins_regular"
-            android:inputType="numberDecimal"/>
+            android:inputType="numberDecimal" />
 
-        <!-- Heading for Longitude -->
+        <!-- Longitude -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -126,30 +126,20 @@
             android:textColor="#FFFFFF"
             android:textSize="18sp"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"
-            android:fontFamily="@font/poppins_bold"/>
+            android:fontFamily="@font/poppins_bold" />
 
-        <!-- Longitude (Editable) -->
         <EditText
             android:id="@+id/input_longitude"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:hint="Longitude"
-            android:layout_marginTop="16dp"
             android:background="@drawable/edittext_background"
             android:padding="12dp"
             android:textColor="#000000"
             android:fontFamily="@font/poppins_regular"
-            android:inputType="numberDecimal"/>
+            android:inputType="numberDecimal" />
 
-        <!-- Map to select location -->
-        <org.osmdroid.views.MapView
-            android:id="@+id/osm_map"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginTop="16dp" />
-
-        <!-- Heading for Contact Number -->
+        <!-- Contact -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -157,31 +147,28 @@
             android:textColor="#FFFFFF"
             android:textSize="18sp"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"
-            android:fontFamily="@font/poppins_bold"/>
+            android:fontFamily="@font/poppins_bold" />
 
-        <!-- Contact Number input -->
         <EditText
             android:id="@+id/input_contact"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:hint="Contact Number"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/edittext_background"
             android:inputType="phone"
+            android:background="@drawable/edittext_background"
             android:padding="12dp"
             android:textColor="#000000"
             android:fontFamily="@font/poppins_regular" />
 
-        <!-- Submit Request Button -->
+        <!-- Submit Button -->
         <Button
             android:id="@+id/btn_submit_request"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="30dp"
             android:text="Submit Request"
             android:textColor="#B00020"
             android:textSize="18sp"
+            android:layout_marginTop="30dp"
             android:backgroundTint="#FFFFFF"
             android:fontFamily="@font/poppins_bold" />
     </LinearLayout>

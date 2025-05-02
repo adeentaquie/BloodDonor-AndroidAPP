@@ -2,7 +2,7 @@
 
 plugins {
     alias(libs.plugins.android.application)
-    id("com.google.gms.google-services") // ✅ Apply Firebase plugin here
+    id("com.google.gms.google-services") // ✅ Firebase plugin
 }
 
 android {
@@ -17,6 +17,15 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        // ✅ Inject MAPS_API_KEY from local.properties
+        val mapsApiKey: String? = project.findProperty("MAPS_API_KEY") as String?
+        if (mapsApiKey != null) {
+            buildConfigField("String", "MAPS_API_KEY", "\"$mapsApiKey\"")
+        }
+
+        // ✅ This line fixes the manifest merger issue
+        manifestPlaceholders["MAPS_API_KEY"] = mapsApiKey ?: ""
     }
 
     buildTypes {
@@ -38,9 +47,9 @@ android {
 dependencies {
     implementation("com.google.firebase:firebase-auth:22.1.1")
     implementation("com.google.firebase:firebase-firestore:24.7.1")
-    implementation ("org.osmdroid:osmdroid-android:6.1.10")
-    implementation("org.osmdroid:osmdroid-wms:6.1.10")
-    implementation(libs.osmdroid)
+    implementation("com.google.android.gms:play-services-maps:18.1.0")
+    implementation("com.google.android.gms:play-services-location:21.0.1")
+    implementation("com.google.android.libraries.places:places:3.3.0")
 
     implementation(libs.appcompat)
     implementation(libs.material)

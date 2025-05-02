@@ -25,5 +25,7 @@
         <item>Quetta</item>
         <item>Sialkot</item>
     </string-array>
+    <string name="google_maps_key">AIzaSyCBB5cgy-eFOnF7IkTGnHaNKiI8XXywijU</string>
+
 
 </resources>
