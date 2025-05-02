@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@drawable/bg_gradient_dark">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <TextView
+            android:gravity="center_horizontal"
+            android:id="@+id/txt_hospital"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hospital Name"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/quantum_white_100"
+            android:paddingBottom="8dp" />
+
+    </LinearLayout>
+
+
+
+    <!-- Blood Group -->
+    <TextView
+        android:id="@+id/txt_blood_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Blood Group: A+"
+        android:textSize="16sp"
+        android:paddingBottom="4dp"
+        android:padding="10dp"
+        android:textColor="@color/quantum_white_100"
+     />
+
+    <!-- Urgency -->
+    <TextView
+        android:id="@+id/txt_urgency"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Urgency: High"
+        android:textSize="16sp"
+        android:textColor="@color/quantum_white_100"
+        android:padding="10dp"
+
+        android:paddingBottom="4dp" />
+
+    <!-- Location -->
+    <TextView
+        android:id="@+id/txt_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+
+        android:text="Location: Lahore"
+        android:textSize="16sp"
+        android:textColor="@color/quantum_white_100"
+        android:paddingBottom="4dp" />
+
+    <!-- Contact Number -->
+    <TextView
+        android:id="@+id/txt_contact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+
+        android:text="Contact Number: 03001234567"
+        android:textSize="16sp"
+        android:textColor="@color/quantum_white_100"
+        android:paddingBottom="16dp" />
+
+    <!-- Distance (optional) -->
+    <TextView
+        android:id="@+id/txt_distance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Distance: 1.2 km away"
+        android:padding="10dp"
+
+        android:textSize="14sp"
+        android:textColor="@color/quantum_white_100"
+        android:paddingBottom="8dp" />
+
+    <!-- Call and Message Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+
+        android:orientation="horizontal"
+        android:gravity="end">
+
+        <Button
+            android:id="@+id/btn_call"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Call"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#4CAF50" />
+
+        <Button
+            android:id="@+id/btn_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Message"
+            android:textColor="#FFFFFF"
+            android:layout_marginStart="16dp"
+            android:backgroundTint="#2196F3" />
+    </LinearLayout>
+
+</LinearLayout>

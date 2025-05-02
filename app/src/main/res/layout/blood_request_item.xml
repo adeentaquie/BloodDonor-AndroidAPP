@@ -1,46 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:layout_marginBottom="16dp"
+    android:layout_marginTop="8dp"
+    android:elevation="10dp"
     android:padding="16dp"
-    android:background="?android:attr/selectableItemBackground"
-    android:layout_marginBottom="10dp"
-    android:elevation="4dp">
+    android:background="@drawable/bg_gradient_dark"
+    android:radius="18dp">
 
-    <TextView
-        android:id="@+id/blood_group"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="A+"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        android:fontFamily="@font/poppins_bold"/>
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="vertical"
+android:padding="10dp">
 
-    <TextView
-        android:id="@+id/urgency"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Urgency: High"
-        android:textColor="#B00020"
-        android:textSize="16sp"
-        android:fontFamily="@font/poppins_regular"/>
+<!-- Blood Group Title -->
+<TextView
+    android:id="@+id/blood_group"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="A+"
+    android:textColor="#B00020"
+    android:textSize="22sp"
+android:fontFamily="@font/poppins_bold"
+android:layout_marginBottom="8dp"
+android:backgroundTint="#ffffff"
+android:padding="6dp"
+android:gravity="center"
+android:textStyle="bold"/>
 
-    <TextView
-        android:id="@+id/location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Location: Lahore"
-        android:textColor="#555555"
-        android:textSize="16sp"
-        android:fontFamily="@font/poppins_regular"/>
+<!-- Urgency Text -->
+<TextView
+    android:id="@+id/urgency"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Urgency: High"
+    android:textColor="#FF5733"
+android:textSize="18sp"
+android:fontFamily="@font/poppins_regular"
+android:layout_marginTop="4dp"
+android:layout_marginBottom="6dp"/>
 
-    <TextView
-        android:id="@+id/contact"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Contact: 03001234567"
-        android:textColor="#555555"
-        android:textSize="16sp"
-        android:fontFamily="@font/poppins_regular"/>
+<!-- Location Text -->
+<TextView
+    android:id="@+id/location"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Location: Lahore"
+    android:textColor="#2C3E50"
+android:textSize="16sp"
+android:fontFamily="@font/poppins_regular"
+android:layout_marginTop="4dp"
+android:layout_marginBottom="6dp"/>
+
+<!-- Contact Number -->
+<TextView
+    android:id="@+id/contact"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Contact: 03001234567"
+    android:textColor="#3498DB"
+android:textSize="16sp"
+android:fontFamily="@font/poppins_regular"
+android:layout_marginTop="4dp"
+android:layout_marginBottom="6dp"/>
+
+<!-- Distance Text -->
+<TextView
+    android:id="@+id/distance"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="1.2 km away"
+    android:textColor="#8E44AD"
+android:textSize="14sp"
+android:layout_marginTop="8dp"
+android:fontFamily="@font/poppins_regular"/>
+
 </LinearLayout>
+
+    </androidx.cardview.widget.CardView>

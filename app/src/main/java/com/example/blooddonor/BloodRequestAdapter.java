@@ -8,13 +8,20 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+import java.util.Locale;
 
 public class BloodRequestAdapter extends RecyclerView.Adapter<BloodRequestAdapter.BloodRequestViewHolder> {
 
     private List<BloodRequest> bloodRequestList;
+    private OnItemClickListener listener;
 
-    public BloodRequestAdapter(List<BloodRequest> bloodRequestList) {
+    public interface OnItemClickListener {
+        void onItemClick(BloodRequest request);
+    }
+
+    public BloodRequestAdapter(List<BloodRequest> bloodRequestList, OnItemClickListener listener) {
         this.bloodRequestList = bloodRequestList;
+        this.listener = listener;
     }
 
     @Override
@@ -31,6 +38,14 @@ public class BloodRequestAdapter extends RecyclerView.Adapter<BloodRequestAdapte
         holder.urgencyTextView.setText(bloodRequest.getUrgency());
         holder.locationTextView.setText(bloodRequest.getLocation());
         holder.contactTextView.setText(bloodRequest.getContact());
+
+        if (bloodRequest.getDistanceKm() > 0) {
+            holder.distanceTextView.setText(String.format(Locale.getDefault(), "%.2f km away", bloodRequest.getDistanceKm()));
+        } else {
+            holder.distanceTextView.setText("");
+        }
+
+        holder.itemView.setOnClickListener(v -> listener.onItemClick(bloodRequest));
     }
 
     @Override
@@ -39,7 +54,7 @@ public class BloodRequestAdapter extends RecyclerView.Adapter<BloodRequestAdapte
     }
 
     public static class BloodRequestViewHolder extends RecyclerView.ViewHolder {
-        public TextView bloodGroupTextView, urgencyTextView, locationTextView, contactTextView;
+        public TextView bloodGroupTextView, urgencyTextView, locationTextView, contactTextView, distanceTextView;
 
         public BloodRequestViewHolder(View view) {
             super(view);
@@ -47,6 +62,7 @@ public class BloodRequestAdapter extends RecyclerView.Adapter<BloodRequestAdapte
             urgencyTextView = view.findViewById(R.id.urgency);
             locationTextView = view.findViewById(R.id.location);
             contactTextView = view.findViewById(R.id.contact);
+            distanceTextView = view.findViewById(R.id.distance);
         }
     }
 }

@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
-    <!-- Permissions -->
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.blooddonor">
+
+    <!-- ✅ Required Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" /> <!-- For Android 13+ -->
 
     <application
         android:name=".MyApplication"
@@ -18,46 +22,36 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BloodDonor"
         tools:targetApi="31">
-        <activity
-            android:name=".LocationPickerActivity"
-            android:exported="false" />
-        <!-- ✅ Inject Google Maps API key from Gradle -->
+
+        <!-- ✅ Firebase Messaging Service -->
+        <service
+            android:name=".MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <!-- ✅ Google Maps API Key -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="${MAPS_API_KEY}" /> <!-- Activities -->
-        <activity
-            android:name=".ViewBloodRequestsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MapPickerActivity"
-            android:exported="false" />
-        <activity
-            android:name=".FindDonorActivity"
-            android:exported="false" />
-        <activity
-            android:name=".PostRequestActivity"
-            android:exported="false" />
-        <activity
-            android:name=".RegisterActivity"
-            android:exported="false" />
-        <activity
-            android:name=".DashboardActivity"
-            android:exported="false" />
-        <activity
-            android:name=".LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SplashActivity"
-            android:exported="true">
+            android:value="${MAPS_API_KEY}" />
+
+        <!-- ✅ Activities -->
+        <activity android:name=".LocationPickerActivity" android:exported="false" />
+        <activity android:name=".ViewBloodRequestsActivity" android:exported="false" />
+        <activity android:name=".MapPickerActivity" android:exported="false" />
+        <activity android:name=".FindDonorActivity" android:exported="false" />
+        <activity android:name=".PostRequestActivity" android:exported="false" />
+        <activity android:name=".RegisterActivity" android:exported="false" />
+        <activity android:name=".DashboardActivity" android:exported="false" />
+        <activity android:name=".LoginActivity" android:exported="false" />
+        <activity android:name=".MainActivity" android:exported="false" />
+        <activity android:name=".SplashActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
-
 </manifest>
