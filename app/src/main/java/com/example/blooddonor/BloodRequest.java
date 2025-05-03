@@ -12,6 +12,9 @@ public class BloodRequest {
     private String userId;
 
     private double distanceKm;
+    private String id; // Firestore document ID
+    private String status; // "pending" or "fulfilled"
+
 
     public BloodRequest() {
         // Required for Firestore
@@ -41,6 +44,21 @@ public class BloodRequest {
 
     public String getUrgency() {
         return urgency;
+    }
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public void setUrgency(String urgency) {

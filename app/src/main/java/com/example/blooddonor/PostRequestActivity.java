@@ -103,6 +103,7 @@ public class PostRequestActivity extends AppCompatActivity {
         request.put("contact", contact);
         request.put("timestamp", System.currentTimeMillis());
         request.put("userId", mAuth.getCurrentUser().getUid());
+        request.put("status", "pending"); // ✅ Default status
 
         firestore.collection("blood_requests")
                 .add(request)
@@ -114,4 +115,5 @@ public class PostRequestActivity extends AppCompatActivity {
                     Toast.makeText(this, "Failed to post: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
     }
+
 }

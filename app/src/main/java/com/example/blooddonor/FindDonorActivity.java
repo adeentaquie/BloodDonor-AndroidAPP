@@ -1,105 +1,175 @@
-//package com.example.blooddonor;
-//
-//import android.os.Bundle;
-//import android.text.TextUtils;
-//import android.widget.ArrayAdapter;
-//import android.widget.Button;
-//import android.widget.EditText;
-//import android.widget.Spinner;
-//import android.widget.Toast;
-//
-//import androidx.appcompat.app.AppCompatActivity;
-//import androidx.recyclerview.widget.LinearLayoutManager;
-//import androidx.recyclerview.widget.RecyclerView;
-//
-//import com.google.firebase.firestore.FirebaseFirestore;
-//import com.google.firebase.firestore.QueryDocumentSnapshot;
-//import com.google.firebase.firestore.QuerySnapshot;
-//
-//
-//import java.util.ArrayList;
-//import java.util.List;
-//
-//public class FindDonorActivity extends AppCompatActivity {
-//
-//    private Spinner bloodGroupSpinner;
-//    private EditText locationInput;
-//    private Button findDonorsBtn;
-//    private RecyclerView donorsRecyclerView;
-//
-//    private FirebaseFirestore firestore;
-//    private DonorAdapter donorAdapter;
-//    private List<Donor> donorList;
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_find_donor);
-//
-//        // Initialize Firestore
-//        firestore = FirebaseFirestore.getInstance();
-//
-//        // Bind views
-//        bloodGroupSpinner = findViewById(R.id.spinner_blood_group);
-//        locationInput = findViewById(R.id.input_location);
-//        findDonorsBtn = findViewById(R.id.btn_find_donors);
-//        donorsRecyclerView = findViewById(R.id.recycler_view_donors);
-//
-//        // Setup blood group spinner
-//        ArrayAdapter<CharSequence> bloodAdapter = ArrayAdapter.createFromResource(this,
-//                R.array.blood_groups, android.R.layout.simple_spinner_item);
-//        bloodAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        bloodGroupSpinner.setAdapter(bloodAdapter);
-//
-//        // Initialize RecyclerView for displaying donors
-//        donorList = new ArrayList<>();
-//        donorAdapter = new DonorAdapter(donorList);
-//        donorsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        donorsRecyclerView.setAdapter(donorAdapter);
-//
-//        // Button click listener to fetch donors
-//        findDonorsBtn.setOnClickListener(v -> findDonors());
-//    }
-//
-//    private void findDonors() {
-//        String bloodGroup = bloodGroupSpinner.getSelectedItem().toString();
-//        String location = locationInput.getText().toString().trim();
-//
-//        if (TextUtils.isEmpty(location)) {
-//            Toast.makeText(this, "Please enter your location", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-//
-//        // Get coordinates based on the entered city/location
-//        GeoPoint userLocation = getUserLocationFromCity(location);
-//        if (userLocation != null) {
-//            // Fetch donors from Firestore based on location and blood group
-//            firestore.collection("donors")
-//                    .whereEqualTo("bloodGroup", bloodGroup)
-//                    .whereEqualTo("location", location)
-//                    .get()
-//                    .addOnSuccessListener(queryDocumentSnapshots -> {
-//                        donorList.clear(); // Clear previous results
-//                        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-//                            Donor donor = document.toObject(Donor.class);
-//                            donorList.add(donor);  // Add donors to the list
-//                        }
-//                        donorAdapter.notifyDataSetChanged();  // Update the RecyclerView
-//                    })
-//                    .addOnFailureListener(e -> {
-//                        Toast.makeText(FindDonorActivity.this, "Error loading donors: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-//                    });
-//        } else {
-//            Toast.makeText(this, "Invalid location", Toast.LENGTH_SHORT).show();
-//        }
-//    }
-//
-//    private GeoPoint getUserLocationFromCity(String city) {
-//        // Example: Use hardcoded coordinates for cities, or use reverse geocoding for real-time data
-//        if (city.equalsIgnoreCase("Lahore")) {
-//            return new GeoPoint(31.5204, 74.3587);
-//        }
-//        // Add more cities or use Geocoder for dynamic city-to-coordinates mapping
-//        return null;
-//    }
-//}
+package com.example.blooddonor;
+
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.widget.*;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+
+import java.util.*;
+
+public class FindDonorActivity extends AppCompatActivity {
+
+    private Spinner bloodGroupSpinner, citySpinner;
+    private Button searchBtn, notifyBtn;
+    private RecyclerView donorRecyclerView;
+
+    private FirebaseFirestore firestore;
+
+    private List<User> donorList;
+    private DonorAdapter donorAdapter;
+
+    private List<String> cityList;
+    private ArrayAdapter<String> cityAdapter;
+
+    private List<String> bloodGroupList;
+    private ArrayAdapter<String> bloodGroupAdapter;
+
+    private String selectedCity = "";
+    private String selectedGroup = "";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_find_donor);
+
+        firestore = FirebaseFirestore.getInstance();
+
+        bloodGroupSpinner = findViewById(R.id.spinner_blood_group);
+        citySpinner = findViewById(R.id.spinner_city);
+        searchBtn = findViewById(R.id.btn_search);
+        notifyBtn = findViewById(R.id.btn_notify_all);
+        donorRecyclerView = findViewById(R.id.recycler_view_donors);
+
+        donorList = new ArrayList<>();
+        donorAdapter = new DonorAdapter(donorList);
+        donorRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        donorRecyclerView.setAdapter(donorAdapter);
+
+        // Setup city spinner
+        cityList = new ArrayList<>();
+        cityAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, cityList);
+        cityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        citySpinner.setAdapter(cityAdapter);
+
+        // Setup blood group spinner
+        bloodGroupList = new ArrayList<>();
+        bloodGroupAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, bloodGroupList);
+        bloodGroupAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        bloodGroupSpinner.setAdapter(bloodGroupAdapter);
+
+        // Load data
+        fetchCities();
+        fetchBloodGroups();
+
+        searchBtn.setOnClickListener(v -> {
+            selectedCity = citySpinner.getSelectedItem().toString();
+            selectedGroup = bloodGroupSpinner.getSelectedItem().toString();
+            fetchDonors();
+        });
+
+        notifyBtn.setOnClickListener(v -> {
+            if ("Select City".equalsIgnoreCase(selectedCity) || "Select Group".equalsIgnoreCase(selectedGroup)) {
+                Toast.makeText(this, "Please select both blood group and city first", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (donorList.isEmpty()) {
+                Toast.makeText(this, "No donors to notify", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            String message = "Urgent blood request in " + selectedCity + " for " + selectedGroup + ". Please respond if you can donate.";
+
+            for (User donor : donorList) {
+                String phone = donor.getPhone().replaceFirst("^0", "92"); // Format to international
+                try {
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse("https://wa.me/" + phone + "?text=" + Uri.encode(message)));
+                    startActivity(intent);
+                } catch (Exception e) {
+                    Toast.makeText(this, "WhatsApp not available for " + donor.getName(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    private void fetchCities() {
+        firestore.collection("users")
+                .whereEqualTo("role", "donor")
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    Set<String> citySet = new HashSet<>();
+                    for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
+                        String city = doc.getString("city");
+                        if (city != null && !city.trim().isEmpty()) {
+                            citySet.add(city.trim());
+                        }
+                    }
+                    cityList.clear();
+                    cityList.add("Select City");
+                    cityList.addAll(citySet);
+                    Collections.sort(cityList);
+                    cityAdapter.notifyDataSetChanged();
+                })
+                .addOnFailureListener(e ->
+                        Toast.makeText(this, "Failed to load cities", Toast.LENGTH_SHORT).show());
+    }
+
+    private void fetchBloodGroups() {
+        firestore.collection("users")
+                .whereEqualTo("role", "donor")
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    Set<String> groupSet = new HashSet<>();
+                    for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
+                        String group = doc.getString("bloodGroup");
+                        if (group != null && !group.trim().isEmpty()) {
+                            groupSet.add(group.trim());
+                        }
+                    }
+                    bloodGroupList.clear();
+                    bloodGroupList.add("Select Group");
+                    bloodGroupList.addAll(groupSet);
+                    Collections.sort(bloodGroupList);
+                    bloodGroupAdapter.notifyDataSetChanged();
+                })
+                .addOnFailureListener(e ->
+                        Toast.makeText(this, "Failed to load blood groups", Toast.LENGTH_SHORT).show());
+    }
+
+    private void fetchDonors() {
+        if ("Select Group".equalsIgnoreCase(bloodGroupSpinner.getSelectedItem().toString())
+                || "Select City".equalsIgnoreCase(citySpinner.getSelectedItem().toString())) {
+            Toast.makeText(this, "Please select both blood group and city", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        firestore.collection("users")
+                .whereEqualTo("role", "donor")
+                .whereEqualTo("bloodGroup", bloodGroupSpinner.getSelectedItem().toString())
+                .whereEqualTo("city", citySpinner.getSelectedItem().toString())
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    donorList.clear();
+                    for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
+                        User user = new User();
+                        user.setName(doc.getString("name"));
+                        user.setBloodGroup(doc.getString("bloodGroup"));
+                        user.setPhone(doc.getString("phone"));
+                        user.setCity(doc.getString("city"));
+                        donorList.add(user);
+                    }
+                    donorAdapter.notifyDataSetChanged();
+                })
+                .addOnFailureListener(e ->
+                        Toast.makeText(this, "Failed to fetch donors: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+    }
+}

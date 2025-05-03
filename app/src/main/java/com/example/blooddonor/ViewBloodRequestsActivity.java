@@ -24,14 +24,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.messaging.FirebaseMessaging;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class ViewBloodRequestsActivity extends AppCompatActivity {
 
@@ -39,6 +36,7 @@ public class ViewBloodRequestsActivity extends AppCompatActivity {
     private Button viewRequestsBtn;
     private RecyclerView requestsRecyclerView;
     private FirebaseFirestore firestore;
+    private FirebaseAuth auth;
     private BloodRequestAdapter bloodRequestAdapter;
     private List<BloodRequest> bloodRequestList;
 
@@ -52,23 +50,43 @@ public class ViewBloodRequestsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_blood_requests);
 
         firestore = FirebaseFirestore.getInstance();
+        auth = FirebaseAuth.getInstance();
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         bloodGroupSpinner = findViewById(R.id.spinner_blood_group);
         viewRequestsBtn = findViewById(R.id.btn_view_requests);
         requestsRecyclerView = findViewById(R.id.recycler_view_requests);
 
-        ArrayAdapter<CharSequence> bloodAdapter = ArrayAdapter.createFromResource(this,
-                R.array.blood_groups, android.R.layout.simple_spinner_item);
-        bloodAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        bloodGroupSpinner.setAdapter(bloodAdapter);
-
+        requestsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         bloodRequestList = new ArrayList<>();
         bloodRequestAdapter = new BloodRequestAdapter(bloodRequestList, this::showRequestDialog);
-        requestsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         requestsRecyclerView.setAdapter(bloodRequestAdapter);
 
+        loadAvailableBloodGroups();  // ✅ Load only blood groups with open requests
+
         viewRequestsBtn.setOnClickListener(v -> fetchLocationAndRequests());
+    }
+
+    private void loadAvailableBloodGroups() {
+        firestore.collection("blood_requests")
+                .get()
+                .addOnSuccessListener(querySnapshot -> {
+                    Set<String> bloodGroups = new HashSet<>();
+                    for (QueryDocumentSnapshot doc : querySnapshot) {
+                        String group = doc.getString("bloodGroup");
+                        String status = doc.getString("status");
+                        if (group != null && !"fulfilled".equalsIgnoreCase(status)) {
+                            bloodGroups.add(group);
+                        }
+                    }
+                    List<String> sortedGroups = new ArrayList<>(bloodGroups);
+                    Collections.sort(sortedGroups);
+
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                            android.R.layout.simple_spinner_item, sortedGroups);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    bloodGroupSpinner.setAdapter(adapter);
+                });
     }
 
     private void fetchLocationAndRequests() {
@@ -104,16 +122,23 @@ public class ViewBloodRequestsActivity extends AppCompatActivity {
                     bloodRequestList.clear();
 
                     for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                        String status = document.getString("status");
+                        if (status != null && status.equalsIgnoreCase("fulfilled")) {
+                            continue;
+                        }
+
                         BloodRequest request = new BloodRequest();
+                        request.setId(document.getId());
                         request.setBloodGroup(document.getString("bloodGroup"));
                         request.setUrgency(document.getString("urgency"));
                         request.setLocation(document.getString("location"));
                         request.setContact(document.getString("contact"));
-                        request.setHospital(document.getString("hospital"));  // Set the hospital name from Firestore
+                        request.setHospital(document.getString("hospital"));
                         request.setLatitude(document.getString("latitude"));
                         request.setLongitude(document.getString("longitude"));
                         request.setUserId(document.getString("userId"));
                         request.setTimestamp(document.getLong("timestamp"));
+                        request.setStatus(status);
 
                         try {
                             String latStr = request.getLatitude();
@@ -129,7 +154,6 @@ public class ViewBloodRequestsActivity extends AppCompatActivity {
                                 request.setDistanceKm(distanceInKm);
 
                                 request.setLocation(request.getLocation() + String.format(" (%.1f km away)", distanceInKm));
-
                                 bloodRequestList.add(request);
                             }
                         } catch (NumberFormatException e) {
@@ -143,21 +167,14 @@ public class ViewBloodRequestsActivity extends AppCompatActivity {
                 .addOnFailureListener(e -> Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show());
     }
 
-
     private void showRequestDialog(BloodRequest request) {
         View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_request_details, null);
 
-        // Set hospital name
         ((TextView) dialogView.findViewById(R.id.txt_hospital)).setText(request.getHospital());
-        // Set blood group
         ((TextView) dialogView.findViewById(R.id.txt_blood_type)).setText("Blood Group: " + request.getBloodGroup());
-        // Set urgency
         ((TextView) dialogView.findViewById(R.id.txt_urgency)).setText("Urgency: " + request.getUrgency());
-        // Set location
         ((TextView) dialogView.findViewById(R.id.txt_location)).setText("Location: " + request.getLocation());
-        // Set contact number
         ((TextView) dialogView.findViewById(R.id.txt_contact)).setText("Contact Number: " + request.getContact());
-        // Set distance (if applicable)
         ((TextView) dialogView.findViewById(R.id.txt_distance)).setText("Distance: " + request.getDistanceKm() + " km away");
 
         AlertDialog dialog = new AlertDialog.Builder(this)
@@ -172,23 +189,60 @@ public class ViewBloodRequestsActivity extends AppCompatActivity {
         });
 
         dialogView.findViewById(R.id.btn_message).setOnClickListener(v -> {
-            String phone = request.getContact().replaceFirst("^0", "92"); // Convert local number to international format
+            String phone = request.getContact().replaceFirst("^0", "92");
             String message = "Hi, I’m a blood donor. I saw your request on the app. How can I help?";
             try {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("https://wa.me/" + phone + "?text=" + Uri.encode(message))); // Send message via WhatsApp
+                intent.setData(Uri.parse("https://wa.me/" + phone + "?text=" + Uri.encode(message)));
                 startActivity(intent);
             } catch (Exception e) {
                 Toast.makeText(this, "WhatsApp not installed", Toast.LENGTH_SHORT).show();
             }
         });
 
+        dialogView.findViewById(R.id.btn_accept).setOnClickListener(v -> {
+            String donorId = auth.getCurrentUser().getUid();
+
+            Map<String, Object> donation = new HashMap<>();
+            donation.put("requestId", request.getId());
+            donation.put("recipientId", request.getUserId());
+            donation.put("donorId", donorId);
+            donation.put("donationDate", System.currentTimeMillis());
+            donation.put("hospital", request.getHospital());
+            donation.put("location", request.getLocation());
+            donation.put("bloodGroup", request.getBloodGroup());
+            donation.put("status", "accepted");
+
+            firestore.collection("donations")
+                    .add(donation)
+                    .addOnSuccessListener(docRef -> {
+                        // ✅ Step 1: Update status of the request
+                        firestore.collection("blood_requests")
+                                .document(request.getId())
+                                .update("status", "fulfilled")
+                                .addOnSuccessListener(unused -> {
+                                    Toast.makeText(this, "Request accepted and marked as fulfilled!", Toast.LENGTH_SHORT).show();
+
+                                    // ✅ Step 2: Notify recipient via WhatsApp
+                                    String phone = request.getContact().replaceFirst("^0", "92");
+                                    String message = "Hi, I’ve accepted your blood request. Please get in touch!";
+                                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                                    intent.setData(Uri.parse("https://wa.me/" + phone + "?text=" + Uri.encode(message)));
+                                    startActivity(intent);
+
+                                    dialog.dismiss();
+                                    fetchBloodRequests(); // 🔄 Refresh list to hide accepted request
+                                })
+                                .addOnFailureListener(e -> {
+                                    Toast.makeText(this, "Failed to mark as fulfilled: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                });
+                    })
+                    .addOnFailureListener(e -> Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+
+        });
+
         dialog.show();
     }
-
-
-
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

@@ -15,6 +15,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class DashboardActivity extends AppCompatActivity {
 
     private Button btnPostRequest, btnFindDonors, btnDonationHistory, btnProfile, btnViewRequests;
+    private Button btnManageRequests; // define at top
+
     private FirebaseAuth mAuth;
     private FirebaseFirestore firestore;
 
@@ -31,6 +33,7 @@ public class DashboardActivity extends AppCompatActivity {
         btnDonationHistory = findViewById(R.id.btn_donation_history);
         btnProfile = findViewById(R.id.btn_profile);
         btnViewRequests = findViewById(R.id.btn_view_requests);
+        btnManageRequests = findViewById(R.id.btn_manage_requests);
 
         // Check if the user is logged in
         if (mAuth.getCurrentUser() == null) {
@@ -52,9 +55,13 @@ public class DashboardActivity extends AppCompatActivity {
                 if ("recipient".equalsIgnoreCase(role)) {
                     btnPostRequest.setVisibility(View.VISIBLE);
                     btnViewRequests.setVisibility(View.GONE);
+                    btnFindDonors.setVisibility(View.VISIBLE);
+                    btnManageRequests.setVisibility(View.VISIBLE);
                 } else {
                     btnPostRequest.setVisibility(View.GONE);
                     btnViewRequests.setVisibility(View.VISIBLE);
+                    btnFindDonors.setVisibility(View.GONE);
+                    btnManageRequests.setVisibility(View.GONE);
                 }
 
                 setupListeners();
@@ -70,8 +77,10 @@ public class DashboardActivity extends AppCompatActivity {
         btnPostRequest.setOnClickListener(v -> startActivity(new Intent(DashboardActivity.this, PostRequestActivity.class)));
 
         // Uncomment this only if FindDonorActivity is implemented
-        // btnFindDonors.setOnClickListener(v -> startActivity(new Intent(DashboardActivity.this, FindDonorActivity.class)));
+         btnFindDonors.setOnClickListener(v -> startActivity(new Intent(DashboardActivity.this, FindDonorActivity.class)));
 
         btnViewRequests.setOnClickListener(v -> startActivity(new Intent(DashboardActivity.this, ViewBloodRequestsActivity.class)));
+        btnManageRequests.setOnClickListener(v ->
+                startActivity(new Intent(DashboardActivity.this, ManageRequestsActivity.class)));
     }
 }
