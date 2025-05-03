@@ -1,148 +1,171 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_gradient_dark"
-    android:fillViewport="true">
+    android:background="@drawable/bg_gradient_dark">
 
-    <LinearLayout
+    <!-- 🔄 Loading Spinner -->
+    <ProgressBar
+        android:id="@+id/loading_indicator"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:visibility="visible" />
+
+    <!-- ✅ Main Content (Initially hidden) -->
+    <ScrollView
+        android:id="@+id/main_content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:padding="24dp"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
-        android:animation="@anim/fade_in">
+        android:visibility="gone"
+        android:fillViewport="true">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Welcome to Blood Donor"
-            android:textSize="26sp"
-            android:textColor="#FFFFFF"
-            android:layout_marginBottom="32dp"
-            android:fontFamily="@font/poppins_bold"/>
-
-        <!-- Card Button Template -->
-        <androidx.cardview.widget.CardView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="6dp"
-            android:layout_marginBottom="16dp"
-            android:clickable="true"
-            android:foreground="?attr/selectableItemBackground">
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:animation="@anim/fade_in">
 
-            <Button
-                android:id="@+id/btn_post_request"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Welcome to Blood Donor"
+                android:textSize="26sp"
+                android:textColor="#FFFFFF"
+                android:layout_marginBottom="32dp"
+                android:fontFamily="@font/poppins_bold" />
+
+            <!-- All Card Buttons Below -->
+
+            <!-- Post Blood Request -->
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:text="Post Blood Request"
-                android:background="@android:color/transparent"
-                android:textColor="#B00020"
-                android:textSize="18sp"
-                android:fontFamily="@font/poppins_bold"/>
-        </androidx.cardview.widget.CardView>
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="6dp"
+                android:layout_marginBottom="16dp"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="6dp"
-            android:layout_marginBottom="16dp"
-            android:clickable="true"
-            android:foreground="?attr/selectableItemBackground">
+                <Button
+                    android:id="@+id/btn_post_request"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:text="Post Blood Request"
+                    android:background="@android:color/transparent"
+                    android:textColor="#B00020"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/poppins_bold" />
+            </androidx.cardview.widget.CardView>
 
-            <Button
-                android:id="@+id/btn_view_requests"
+            <!-- Manage My Requests -->
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:text="View Blood Requests"
-                android:background="@android:color/transparent"
-                android:textColor="#B00020"
-                android:textSize="18sp"
-                android:fontFamily="@font/poppins_bold"/>
-        </androidx.cardview.widget.CardView>
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="6dp"
+                android:layout_marginBottom="16dp"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="6dp"
-            android:layout_marginBottom="16dp"
-            android:clickable="true"
-            android:foreground="?attr/selectableItemBackground">
+                <Button
+                    android:id="@+id/btn_manage_requests"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:text="Manage My Requests"
+                    android:background="@android:color/transparent"
+                    android:textColor="#B00020"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/poppins_bold" />
+            </androidx.cardview.widget.CardView>
 
-            <Button
-                android:id="@+id/btn_find_donors"
+            <!-- View Blood Requests -->
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:text="Find Donors"
-                android:background="@android:color/transparent"
-                android:textColor="#B00020"
-                android:textSize="18sp"
-                android:fontFamily="@font/poppins_bold"/>
-        </androidx.cardview.widget.CardView>
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="6dp"
+                android:layout_marginBottom="16dp"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="6dp"
-            android:layout_marginBottom="16dp"
-            android:clickable="true"
-            android:foreground="?attr/selectableItemBackground">
+                <Button
+                    android:id="@+id/btn_view_requests"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:text="View Blood Requests"
+                    android:background="@android:color/transparent"
+                    android:textColor="#B00020"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/poppins_bold" />
+            </androidx.cardview.widget.CardView>
 
-            <Button
-                android:id="@+id/btn_donation_history"
+            <!-- Find Donors -->
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:text="Donation History"
-                android:background="@android:color/transparent"
-                android:textColor="#B00020"
-                android:textSize="18sp"
-                android:fontFamily="@font/poppins_bold"/>
-        </androidx.cardview.widget.CardView>
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="6dp"
+                android:layout_marginBottom="16dp"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="6dp"
-            android:layout_marginBottom="16dp"
-            android:clickable="true"
-            android:foreground="?attr/selectableItemBackground">
+                <Button
+                    android:id="@+id/btn_find_donors"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:text="Find Donors"
+                    android:background="@android:color/transparent"
+                    android:textColor="#B00020"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/poppins_bold" />
+            </androidx.cardview.widget.CardView>
 
-            <Button
-                android:id="@+id/btn_profile"
+            <!-- Donation History -->
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:text="My Profile"
-                android:background="@android:color/transparent"
-                android:textColor="#B00020"
-                android:textSize="18sp"
-                android:fontFamily="@font/poppins_bold"/>
-        </androidx.cardview.widget.CardView>
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="6dp"
+                android:layout_marginBottom="16dp"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="6dp"
-            android:layout_marginBottom="32dp"
-            android:clickable="true"
-            android:foreground="?attr/selectableItemBackground">
+                <Button
+                    android:id="@+id/btn_donation_history"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:text="Donation History"
+                    android:background="@android:color/transparent"
+                    android:textColor="#B00020"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/poppins_bold" />
+            </androidx.cardview.widget.CardView>
 
-            <Button
-                android:id="@+id/btn_manage_requests"
+            <!-- My Profile -->
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:text="Manage My Requests"
-                android:background="@android:color/transparent"
-                android:textColor="#B00020"
-                android:textSize="18sp"
-                android:fontFamily="@font/poppins_bold"/>
-        </androidx.cardview.widget.CardView>
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="6dp"
+                android:layout_marginBottom="16dp"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground">
 
-    </LinearLayout>
-</ScrollView>
+                <Button
+                    android:id="@+id/btn_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:text="My Profile"
+                    android:background="@android:color/transparent"
+                    android:textColor="#B00020"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/poppins_bold" />
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>
