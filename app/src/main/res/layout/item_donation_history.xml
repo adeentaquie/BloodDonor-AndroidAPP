@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="12dp"
+    android:backgroundTint="#FAFAFA"
+    android:elevation="6dp"
+    android:radius="14dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Donor Name -->
+        <TextView
+            android:id="@+id/txt_donor_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Donor: --"
+            android:textStyle="bold"
+            android:textColor="#B00020"
+            android:textSize="18sp"
+            android:paddingBottom="4dp" />
+
+        <TextView
+            android:id="@+id/txt_recipient_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recipient: --"
+            android:textColor="#3F51B5"
+            android:textSize="16sp"
+            android:layout_marginBottom="4dp"/>
+
+
+        <!-- Blood Group -->
+        <TextView
+            android:id="@+id/txt_blood_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Blood Group: --"
+            android:textColor="#333333"
+            android:textSize="16sp" />
+
+        <!-- Hospital -->
+        <TextView
+            android:id="@+id/txt_hospital"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hospital: --"
+            android:textColor="#333333"
+            android:textSize="16sp" />
+
+        <!-- Location -->
+        <TextView
+            android:id="@+id/txt_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Location: --"
+            android:textColor="#333333"
+            android:textSize="16sp" />
+
+        <!-- Donation Date -->
+        <TextView
+            android:id="@+id/txt_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Donated on: --"
+            android:textColor="#333333"
+            android:textSize="16sp" />
+
+        <!-- Status -->
+        <TextView
+            android:id="@+id/txt_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Status: --"
+            android:textColor="#4CAF50"
+            android:textStyle="bold"
+            android:layout_marginTop="6dp"
+            android:textSize="16sp" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

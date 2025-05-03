@@ -107,8 +107,8 @@ public class DashboardActivity extends AppCompatActivity {
         btnManageRequests.setOnClickListener(v ->
                 startActivity(new Intent(DashboardActivity.this, ManageRequestsActivity.class)));
 
-//        btnDonationHistory.setOnClickListener(v ->
-//                startActivity(new Intent(DashboardActivity.this, DonationHistoryActivity.class)));
+        btnDonationHistory.setOnClickListener(v ->
+                startActivity(new Intent(DashboardActivity.this, DonationHistoryActivity.class)));
 //
 //        btnProfile.setOnClickListener(v ->
 //                startActivity(new Intent(DashboardActivity.this, ProfileActivity.class)));
