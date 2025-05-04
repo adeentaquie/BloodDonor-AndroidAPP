@@ -110,7 +110,7 @@ public class DashboardActivity extends AppCompatActivity {
         btnDonationHistory.setOnClickListener(v ->
                 startActivity(new Intent(DashboardActivity.this, DonationHistoryActivity.class)));
 //
-//        btnProfile.setOnClickListener(v ->
-//                startActivity(new Intent(DashboardActivity.this, ProfileActivity.class)));
+        btnProfile.setOnClickListener(v ->
+                startActivity(new Intent(DashboardActivity.this, ProfileActivity.class)));
     }
 }

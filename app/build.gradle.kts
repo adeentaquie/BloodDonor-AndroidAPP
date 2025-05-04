@@ -45,8 +45,14 @@ android {
 }
 
 dependencies {
+    implementation ("com.android.volley:volley:1.2.1")
+    implementation ("com.google.android.material:material:1.11.0")// or latest
+
     // ✅ Firebase BoM
     implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
+
+    // Firebase Storage
+    implementation ("com.google.firebase:firebase-storage:20.3.0")
 
     // ✅ Firebase dependencies (no version numbers)
     implementation("com.google.firebase:firebase-auth")
@@ -58,6 +64,10 @@ dependencies {
     implementation("com.google.android.gms:play-services-location:21.0.1")
     implementation("com.google.android.libraries.places:places:3.3.0")
 
+
+    // Glide for image loading
+    implementation ("com.github.bumptech.glide:glide:4.15.1")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.15.1")
     // Jetpack + UI libraries
     implementation(libs.appcompat)
     implementation(libs.material)

@@ -22,6 +22,18 @@
         android:theme="@style/Theme.BloodDonor"
         tools:targetApi="31">
         <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".StatsFragment"
+            android:exported="false" />
+        <activity
+            android:name=".PreferencesFragment"
+            android:exported="false" />
+        <activity
+            android:name=".AccountFragment"
+            android:exported="false" />
+        <activity
             android:name=".DonationHistoryActivity"
             android:exported="false" />
         <activity

@@ -8,4 +8,6 @@
     <color name="cardBackground">#FFE6E6</color>
     <color name="successGreen">#4CAF50</color>
     <color name="warningOrange">#FF5722</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
 </resources>
