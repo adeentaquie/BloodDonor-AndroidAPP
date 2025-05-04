@@ -2,36 +2,30 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_gradient_dark">
+    android:background="@drawable/bloodbackground"
+    >
 
     <!-- Blood Drop 1 -->
     <ImageView
         android:id="@+id/blood_drop_1"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_marginTop="50dp"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/blood" />
-
-    <!-- Blood Drop 2 -->
+        android:src="@drawable/blooddrop" />
     <ImageView
         android:id="@+id/blood_drop_2"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_marginTop="50dp"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
-        android:src="@drawable/blood" />
+        android:src="@drawable/blooddrop" />
 
-    <!-- Blood Drop 3 -->
-    <ImageView
-        android:id="@+id/blood_drop_3"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="200dp"
-        android:src="@drawable/blood" />
+
+    <!-- Blood Drop 2 -->
+
 
     <!-- Logo and App Name -->
     <LinearLayout
@@ -47,7 +41,7 @@
             android:id="@+id/splash_logo"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:src="@drawable/blooddoner"
+            android:src="@drawable/blood4"
             android:scaleType="centerInside" />
 
         <TextView
@@ -93,6 +87,7 @@
             android:textColor="#F5B8B8"
             android:textSize="14sp"
             android:fontFamily="@font/poppins_regular" />
+
     </LinearLayout>
 
 </RelativeLayout>
