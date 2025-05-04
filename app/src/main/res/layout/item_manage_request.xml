@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="#FFFFFF"
+    android:background="@drawable/bg_gradient_dark"
     android:layout_marginBottom="8dp">
 
     <TextView
@@ -12,9 +12,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Hospital Name"
+
         android:textSize="18sp"
         android:textStyle="bold"
-        android:textColor="#B00020" />
+        android:textColor="@color/white" />
 
     <TextView
         android:id="@+id/text_status"
@@ -22,7 +23,7 @@
         android:layout_height="wrap_content"
         android:text="Status: pending"
         android:textSize="16sp"
-        android:textColor="#333333"
+        android:textColor="@color/white"
         android:layout_marginTop="4dp" />
 
     <LinearLayout

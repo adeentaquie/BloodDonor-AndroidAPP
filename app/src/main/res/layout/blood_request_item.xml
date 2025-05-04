@@ -2,81 +2,84 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="16dp"
     android:layout_marginTop="8dp"
+    android:layout_marginBottom="16dp"
     android:elevation="10dp"
     android:padding="16dp"
-    android:background="@drawable/bg_gradient_dark"
     android:radius="18dp">
 
-<LinearLayout
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:orientation="vertical"
-android:padding="10dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@drawable/blooddoner"
+        android:padding="10dp">
 
-<!-- Blood Group Title -->
-<TextView
-    android:id="@+id/blood_group"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="A+"
-    android:textColor="#B00020"
-    android:textSize="22sp"
-android:fontFamily="@font/poppins_bold"
-android:layout_marginBottom="8dp"
-android:backgroundTint="#ffffff"
-android:padding="6dp"
-android:gravity="center"
-android:textStyle="bold"/>
+        <!-- Blood Group Title -->
+        <TextView
+            android:id="@+id/blood_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="A+"
+            android:textColor="@color/black"
+            android:textSize="22sp"
+            android:fontFamily="@font/poppins_bold"
+            android:layout_marginBottom="8dp"
+            android:padding="6dp"
+            android:gravity="center"
+            android:textStyle="bold" />
 
-<!-- Urgency Text -->
-<TextView
-    android:id="@+id/urgency"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Urgency: High"
-    android:textColor="#FF5733"
-android:textSize="18sp"
-android:fontFamily="@font/poppins_regular"
-android:layout_marginTop="4dp"
-android:layout_marginBottom="6dp"/>
+        <!-- Urgency Text -->
+        <TextView
+            android:id="@+id/urgency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Urgency: High"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="22sp"
+            android:fontFamily="@font/poppins_regular"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="6dp" />
 
-<!-- Location Text -->
-<TextView
-    android:id="@+id/location"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Location: Lahore"
-    android:textColor="#2C3E50"
-android:textSize="16sp"
-android:fontFamily="@font/poppins_regular"
-android:layout_marginTop="4dp"
-android:layout_marginBottom="6dp"/>
+        <!-- Location Text -->
+        <TextView
+            android:id="@+id/location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Location: Lahore"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/poppins_regular"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="6dp" />
 
-<!-- Contact Number -->
-<TextView
-    android:id="@+id/contact"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Contact: 03001234567"
-    android:textColor="#3498DB"
-android:textSize="16sp"
-android:fontFamily="@font/poppins_regular"
-android:layout_marginTop="4dp"
-android:layout_marginBottom="6dp"/>
+        <!-- Contact Number -->
+        <TextView
+            android:id="@+id/contact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contact: 03001234567"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:fontFamily="@font/poppins_regular"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="6dp" />
 
-<!-- Distance Text -->
-<TextView
-    android:id="@+id/distance"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="1.2 km away"
-    android:textColor="#8E44AD"
-android:textSize="14sp"
-android:layout_marginTop="8dp"
-android:fontFamily="@font/poppins_regular"/>
+        <!-- Distance Text -->
+        <TextView
+            android:id="@+id/distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1.2 km away"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/poppins_regular" />
+    </LinearLayout>
 
-</LinearLayout>
-
-    </androidx.cardview.widget.CardView>
+</androidx.cardview.widget.CardView>

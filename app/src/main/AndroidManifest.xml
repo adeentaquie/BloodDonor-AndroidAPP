@@ -3,6 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.blooddonor">
     <!-- ✅ Required Permissions -->
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -55,9 +59,7 @@
         <activity
             android:name=".ViewBloodRequestsActivity"
             android:exported="false" />
-        <activity
-            android:name=".MapPickerActivity"
-            android:exported="false" />
+
         <activity
             android:name=".FindDonorActivity"
             android:exported="false" />
@@ -73,9 +75,7 @@
         <activity
             android:name=".LoginActivity"
             android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="false" />
+
         <activity
             android:name=".SplashActivity"
             android:exported="true">

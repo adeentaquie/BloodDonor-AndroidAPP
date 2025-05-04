@@ -3,13 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="@drawable/bg_gradient_dark">
+    android:background="@drawable/bg4">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
+        android:gravity="start"
         android:padding="8dp">
 
         <TextView
@@ -32,6 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Enable Dark Mode"
+            android:textColor="@color/textDark"
             android:layout_marginBottom="24dp" />
 
         <!-- Notification Switch -->

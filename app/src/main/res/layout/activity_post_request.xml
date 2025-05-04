@@ -24,7 +24,7 @@
         <Spinner
             android:id="@+id/spinner_blood_group"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="85dp"
             android:background="@drawable/bg_gradient_dark"
             android:padding="12dp" />
 
@@ -42,8 +42,8 @@
         <Spinner
             android:id="@+id/spinner_urgency"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@drawable/edittext_background"
+            android:layout_height="85dp"
+            android:background="@drawable/bg_gradient_dark"
             android:padding="12dp" />
 
         <!-- Select Location Button -->
@@ -72,9 +72,9 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:hint="Hospital Name"
-            android:background="@drawable/edittext_background"
+            android:background="@drawable/bg_gradient_dark"
             android:padding="12dp"
-            android:textColor="#000000"
+            android:textColor="@color/white"
             android:fontFamily="@font/poppins_regular" />
 
         <!-- City -->
@@ -92,9 +92,9 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:hint="City"
-            android:background="@drawable/edittext_background"
+            android:background="@drawable/bg_gradient_dark"
             android:padding="12dp"
-            android:textColor="#000000"
+            android:textColor="@color/white"
             android:fontFamily="@font/poppins_regular" />
 
         <!-- Latitude -->
@@ -112,9 +112,9 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:hint="Latitude"
-            android:background="@drawable/edittext_background"
+            android:background="@drawable/bg_gradient_dark"
             android:padding="12dp"
-            android:textColor="#000000"
+            android:textColor="@color/white"
             android:fontFamily="@font/poppins_regular"
             android:inputType="numberDecimal" />
 
@@ -133,9 +133,9 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:hint="Longitude"
-            android:background="@drawable/edittext_background"
+            android:background="@drawable/bg_gradient_dark"
             android:padding="12dp"
-            android:textColor="#000000"
+            android:textColor="@color/white"
             android:fontFamily="@font/poppins_regular"
             android:inputType="numberDecimal" />
 
@@ -144,7 +144,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Contact Number"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/black"
             android:textSize="18sp"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins_bold" />
@@ -155,9 +155,9 @@
             android:layout_height="60dp"
             android:hint="Contact Number"
             android:inputType="phone"
-            android:background="@drawable/edittext_background"
+            android:background="@drawable/bg_gradient_dark"
             android:padding="12dp"
-            android:textColor="#000000"
+            android:textColor="@color/white"
             android:fontFamily="@font/poppins_regular" />
 
         <!-- Submit Button -->

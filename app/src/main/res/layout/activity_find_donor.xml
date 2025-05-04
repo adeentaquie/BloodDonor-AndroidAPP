@@ -5,27 +5,64 @@
     android:background="@drawable/bg6"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <TextView
-        android:text="Find Donors"
-        android:textSize="24sp"
-        android:textColor="#FFFFFF"
-        android:layout_marginBottom="20dp"
-        android:fontFamily="@font/poppins_bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <Spinner
-        android:id="@+id/spinner_blood_group"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp" />
+        android:gravity="center">
+        <TextView
+            android:text="Find Donors"
+            android:textSize="24sp"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/poppins_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
-    <Spinner
-        android:id="@+id/spinner_city"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp" />
+        android:orientation="vertical"
+        android:layout_gravity="center">
+        <TextView
+            android:text="Select Blood Group"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/poppins_bold"/>
+        <Spinner
+            android:id="@+id/spinner_blood_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_gradient_dark"
+
+            android:layout_marginBottom="12dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+        <TextView
+            android:text="Select city "
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/poppins_bold"/>
+        <Spinner
+            android:id="@+id/spinner_city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bg_gradient_dark"/>
+    </LinearLayout>
+
 
     <Button
         android:id="@+id/btn_search"

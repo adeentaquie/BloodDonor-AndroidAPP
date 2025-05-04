@@ -42,13 +42,13 @@ public class PostRequestActivity extends AppCompatActivity {
         selectLocationBtn = findViewById(R.id.btn_select_location);
 
         ArrayAdapter<CharSequence> bloodAdapter = ArrayAdapter.createFromResource(this,
-                R.array.blood_groups, android.R.layout.simple_spinner_item);
-        bloodAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.array.blood_groups, R.layout.spinner_item_white);
+        bloodAdapter.setDropDownViewResource(R.layout.spinner_item_white);
         bloodGroupSpinner.setAdapter(bloodAdapter);
 
         ArrayAdapter<CharSequence> urgencyAdapter = ArrayAdapter.createFromResource(this,
-                R.array.urgency_levels, android.R.layout.simple_spinner_item);
-        urgencyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.array.urgency_levels, R.layout.spinner_item_white);
+        urgencyAdapter.setDropDownViewResource(R.layout.spinner_item_white);
         urgencySpinner.setAdapter(urgencyAdapter);
 
         selectLocationBtn.setOnClickListener(v -> {

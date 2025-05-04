@@ -54,15 +54,15 @@ public class FindDonorActivity extends AppCompatActivity {
         donorRecyclerView.setAdapter(donorAdapter);
 
         // Setup city spinner
+        // Setup city spinner
         cityList = new ArrayList<>();
-        cityAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, cityList);
-        cityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        cityAdapter = new ArrayAdapter<>(this, R.layout.spinner_item_white, cityList);
+        cityAdapter.setDropDownViewResource(R.layout.spinner_item_white);
         citySpinner.setAdapter(cityAdapter);
-
-        // Setup blood group spinner
+// Setup blood group spinner
         bloodGroupList = new ArrayList<>();
-        bloodGroupAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, bloodGroupList);
-        bloodGroupAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        bloodGroupAdapter = new ArrayAdapter<>(this, R.layout.spinner_item_white, bloodGroupList);
+        bloodGroupAdapter.setDropDownViewResource(R.layout.spinner_item_white);
         bloodGroupSpinner.setAdapter(bloodGroupAdapter);
 
         // Load data

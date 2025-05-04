@@ -6,14 +6,7 @@
     >
 
     <!-- Blood Drop 1 -->
-    <ImageView
-        android:id="@+id/blood_drop_1"
-        android:layout_marginTop="50dp"
-        android:layout_width="200dp"
-        android:layout_height="100dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/blooddrop" />
+
     <ImageView
         android:id="@+id/blood_drop_2"
         android:layout_marginTop="50dp"

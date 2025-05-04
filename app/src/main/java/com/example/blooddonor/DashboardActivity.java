@@ -16,7 +16,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class DashboardActivity extends AppCompatActivity {
 
     private Button btnPostRequest, btnFindDonors, btnDonationHistory, btnProfile, btnViewRequests;
-    private Button btnManageRequests;
+    private Button btnManageRequests,btnLogout;
 
     private View mainContentLayout;
     private ProgressBar loadingIndicator;
@@ -42,6 +42,7 @@ public class DashboardActivity extends AppCompatActivity {
         btnProfile = findViewById(R.id.btn_profile);
         btnViewRequests = findViewById(R.id.btn_view_requests);
         btnManageRequests = findViewById(R.id.btn_manage_requests);
+        btnLogout = findViewById(R.id.btn_logout);
 
         // Hide content initially
         mainContentLayout.setVisibility(View.GONE);
@@ -112,5 +113,11 @@ public class DashboardActivity extends AppCompatActivity {
 //
         btnProfile.setOnClickListener(v ->
                 startActivity(new Intent(DashboardActivity.this, ProfileActivity.class)));
+
+        btnLogout.setOnClickListener(v -> {
+            mAuth.signOut();
+            startActivity(new Intent(DashboardActivity.this, LoginActivity.class));
+            finish();
+        });
     }
 }
